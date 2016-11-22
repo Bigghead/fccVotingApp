@@ -23,16 +23,20 @@
      function drawChart() {
 
         var foundPoll = <%- JSON.stringify(test) %>;
+        console.log(foundPoll);
 
        // Create the data table.
        var data = new google.visualization.DataTable();
        data.addColumn('string', foundPoll.pollName);
        data.addColumn('number', 'Percentage');
-       data.addRows([
-         [foundPoll.item1, 1],
-         [foundPoll.item2, 1],
-         [foundPoll.item3, 1]
-       ]);
+       var dataArray = [];
+       for(var key in foundPoll){
+         if(key === 'item1' || key === 'item2' || key === 'item3'){
+           dataArray.push([foundPoll.key, 1]);
+         }
+       }
+       console.log(dataArray);
+       data.addRows(dataArray);
        // Set chart options
        var options = {'title':foundPoll.pollName,
                       'width':500,
@@ -47,7 +51,7 @@
 
    <div class="container">
      <div class="">
-       <form class="" action="/polls" method="post" class='pull-right'>
+       <form class="" action="/polls/<%= foundPoll._id %>" method="post" class='pull-right'>
          <label for="">I'd Like to Vote For:</label>
          <select class="" name="vote">
            <option></option>
