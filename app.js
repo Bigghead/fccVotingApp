@@ -20,6 +20,19 @@ var pollSchema = new mongoose.Schema({
 
 var Polls = mongoose.model('Poll', pollSchema);
 
+// Polls.create({
+//   pollName : 'Favorite Comfort Food',
+//   item1: 'Pizza',
+//   item2: 'Burgers/Fries',
+//   item3: 'Coffee'
+// }, function(err, result){
+//   if(err){
+//     console.log(err);
+//   } else {
+//     console.log(result);
+//   }
+// });
+
 
 app.get('/', function(req, res){
   res.render('landing');
@@ -34,6 +47,12 @@ app.get('/polls', function(req, res){
       res.render('polls', {polls: polls});
     }
   });
+});
+
+//Update Survey
+app.post('/polls', function(req, res){
+  console.log(req.body);
+  res.redirect('')
 });
 
 //Show Route

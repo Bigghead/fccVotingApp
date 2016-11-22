@@ -9,7 +9,6 @@
   </p>
 </div>
 
-
 <script type="text/javascript">
 
      // Load the Visualization API and the corechart package.
@@ -30,14 +29,15 @@
        data.addColumn('string', foundPoll.pollName);
        data.addColumn('number', 'Percentage');
        data.addRows([
-         ['Charmander', 1],
-         ['Squirtle', 1],
-         ['Bulbasaur', 1]
+         [foundPoll.item1, 1],
+         [foundPoll.item2, 1],
+         [foundPoll.item3, 1]
        ]);
        // Set chart options
        var options = {'title':foundPoll.pollName,
-                      'width':400,
-                      'height':300};
+                      'width':500,
+                      'height':500
+                      };
 
        // Instantiate and draw our chart, passing in some options.
        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
@@ -45,7 +45,22 @@
      }
    </script>
 
-   <div id='chart_div'>
+   <div class="container">
+     <div class="">
+       <form class="" action="/polls" method="post" class='pull-right'>
+         <label for="">I'd Like to Vote For:</label>
+         <select class="" name="vote">
+           <option></option>
+           <option value=<%= foundPoll.item1 %>><%= foundPoll.item1 %> </option>
+           <option value=<%= foundPoll.item2 %>><%= foundPoll.item2 %>></option>
+           <option value=<%= foundPoll.item3 %>><%= foundPoll.item3 %>></option>
+         </select>
+         <button type="submit" name="button">Submit</button>
+       </form>
+     </div>
+     <div id='chart_div' style="width:400; height:300">
+
+     </div>
    </div>
 
    <% include partials/footer %>
