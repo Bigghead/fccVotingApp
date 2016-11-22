@@ -1,6 +1,8 @@
 <% include partials/header %>
 
 <% var test = (foundPoll); %>
+<% var dataArray = dataArray; %>
+<% console.log(dataArray); %>
 
 <div class="text-center">
   <h1><%= foundPoll.pollName %></h1>
@@ -23,18 +25,13 @@
      function drawChart() {
 
         var foundPoll = <%- JSON.stringify(test) %>;
-        console.log(foundPoll);
 
        // Create the data table.
        var data = new google.visualization.DataTable();
        data.addColumn('string', foundPoll.pollName);
        data.addColumn('number', 'Percentage');
-       var dataArray = [];
-       for(var key in foundPoll){
-         if(key === 'item1' || key === 'item2' || key === 'item3'){
-           dataArray.push([foundPoll.key, 1]);
-         }
-       }
+
+       var dataArray = <%- dataArray %>;
        console.log(dataArray);
        data.addRows(dataArray);
        // Set chart options
@@ -48,6 +45,7 @@
        chart.draw(data, options);
      }
    </script>
+
 
    <div class="container">
      <div class="">
