@@ -17,20 +17,19 @@ var pollSchema = new mongoose.Schema({
 
 var Polls = mongoose.model('Poll', pollSchema);
 
-Polls.create({pollName : 'Favorite Super Villain'}, function(err, result){
-  if(err){
-    console.log(err);
-  } else {
-    console.log('Poll Successfully Added: ' + result);
-  }
-});
 
 app.get('/', function(req, res){
   res.render('landing');
 });
 
 app.get('/polls', function(req, res){
-  res.render('polls');
+  Polls.find({}, function(err, polls){
+    if(err){
+      console.log(err);
+    } else {
+      res.render('polls', {polls: polls});
+    }
+  });
 });
 
 app.listen('5000', function(){

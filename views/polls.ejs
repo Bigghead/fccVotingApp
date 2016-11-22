@@ -6,8 +6,13 @@
   <h2>Select a poll to see the results and vote, or sign-in to make a new poll.
   </h2>
 
-  <div class="container" id='all-polls'>
-    <a href="/polls/:id"></a>
+  <div  id='all-polls'>
+    <% polls.forEach(function(poll){ %>
+      <div id='singlePoll' class="text-center">
+      <a href='/polls/<%= poll._id %>'</a>
+      <h3><%= poll.pollName %></h3>
+      </div>
+  <%  });  %>
   </div>
 </div>
 
