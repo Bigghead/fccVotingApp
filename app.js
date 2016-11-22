@@ -12,7 +12,10 @@ app.use(express.static(__dirname + '/public'));
 mongoose.connect('mongodb://localhost/polls');
 
 var pollSchema = new mongoose.Schema({
-  pollName : String
+  pollName : String,
+  item1: String,
+  item2: String,
+  item3: String
 });
 
 var Polls = mongoose.model('Poll', pollSchema);
