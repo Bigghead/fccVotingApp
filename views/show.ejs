@@ -2,7 +2,6 @@
 
 <% var test = (foundPoll); %>
 <% var dataArray = dataArray; %>
-<% console.log(dataArray); %>
 
 <div class="text-center">
   <h1><%= foundPoll.pollName %></h1>
@@ -31,7 +30,7 @@
        data.addColumn('string', foundPoll.pollName);
        data.addColumn('number', 'Percentage');
 
-       var dataArray = <%- dataArray %>;
+       var dataArray = <%- JSON.stringify(dataArray) %>;
        console.log(dataArray);
        data.addRows(dataArray);
        // Set chart options

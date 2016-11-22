@@ -51,7 +51,8 @@ app.get('/polls', function(req, res){
 
 //Update Survey
 app.post('/polls/:id', function(req, res){
-  console.log(req.body);
+  var vote = req.body.vote;
+  console.log(vote);
   var id = req.params.id;
 
   Polls.findById(id, function(err, foundPoll){
@@ -63,6 +64,11 @@ app.post('/polls/:id', function(req, res){
         [foundPoll.item2, 1],
         [foundPoll.item3, 1]
       ];
+      for(var i = 0 ; i < dataArray.length; i ++){
+        if(dataArray[i][0] === vote){
+          dataArray[i][1] += 1;
+        }
+      }
       res.render('show', {foundPoll:foundPoll, dataArray: dataArray});
     }
   });
