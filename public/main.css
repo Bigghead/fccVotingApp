@@ -9,3 +9,7 @@
   border: 1px solid lightgray;
   border-radius: 10px;
 }
+
+#chart_div{
+  margin:auto;
+}
