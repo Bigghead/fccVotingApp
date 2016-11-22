@@ -13,18 +13,39 @@ mongoose.connect('mongodb://localhost/polls');
 
 var pollSchema = new mongoose.Schema({
   pollName : String,
-  item1: String,
-  item2: String,
-  item3: String
+  item1: {
+   name: String,
+   count:  Number
+ },
+  item2:{
+    name: String,
+    count: Number
+  },
+  item3:{
+    name: String,
+    count: Number
+  }
 });
 
 var Polls = mongoose.model('Poll', pollSchema);
 
+var hasVoted = false;
+
 // Polls.create({
-//   pollName : 'Favorite Comfort Food',
-//   item1: 'Pizza',
-//   item2: 'Burgers/Fries',
-//   item3: 'Coffee'
+//   pollName : 'Favorite Starter Pokemon',
+//   item1:{
+//     name: 'Charmander',
+//     count: 1
+//   },
+//   item2:{
+//     name: 'Squirtle',
+//     count: 1
+//   },
+//   item3:{
+//     name: 'Bulbasaur',
+//     count: 1
+//   }
+//
 // }, function(err, result){
 //   if(err){
 //     console.log(err);
@@ -60,13 +81,15 @@ app.post('/polls/:id', function(req, res){
       console.log(err);
     } else {
       var dataArray = [
-        [foundPoll.item1, 1],
-        [foundPoll.item2, 1],
-        [foundPoll.item3, 1]
+        [foundPoll.item1.name, foundPoll.item1.count],
+        [foundPoll.item2.name, foundPoll.item2.count],
+        [foundPoll.item3.name, foundPoll.item3.count]
       ];
       for(var i = 0 ; i < dataArray.length; i ++){
         if(dataArray[i][0] === vote){
           dataArray[i][1] += 1;
+
+          // foundPoll.
         }
       }
       res.render('show', {foundPoll:foundPoll, dataArray: dataArray});
@@ -83,9 +106,9 @@ app.get('/polls/:id', function(req, res){
       console.log(err);
     } else {
       var dataArray = [
-        [foundPoll.item1, 1],
-        [foundPoll.item2, 1],
-        [foundPoll.item3, 1]
+        [foundPoll.item1.name, foundPoll.item1.count],
+        [foundPoll.item2.name, foundPoll.item2.count],
+        [foundPoll.item3.name, foundPoll.item3.count]
       ];
       res.render('show', {foundPoll:foundPoll, dataArray: dataArray});
     }
