@@ -1,5 +1,7 @@
 <% include partials/header %>
 
+<% var test = (foundPoll); %>
+
 <div class="text-center">
   <h1><%= foundPoll.pollName %></h1>
   <p>
@@ -7,7 +9,6 @@
   </p>
 </div>
 
-<% include partials/footer %>
 
 <script type="text/javascript">
 
@@ -31,9 +32,9 @@
          ['Squirtle', 1],
          ['Bulbasaur', 1]
        ]);
-
+       var foundPoll = <%- JSON.stringify(test) %>;
        // Set chart options
-       var options = {'title':'Favorite Starter Pokemon',
+       var options = {'title':foundPoll.pollName,
                       'width':400,
                       'height':300};
 
@@ -45,3 +46,5 @@
 
    <div id='chart_div'>
    </div>
+
+   <% include partials/footer %>
