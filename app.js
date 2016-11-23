@@ -13,18 +13,11 @@ mongoose.connect('mongodb://localhost/polls');
 
 var pollSchema = new mongoose.Schema({
   pollName : String,
-  item1: {
-   name: String,
-   count:  Number
- },
-  item2:{
-    name: String,
-    count: Number
-  },
-  item3:{
-    name: String,
-    count: Number
-  }
+  items: [
+    {name: String, count: Number},
+    {name: String, count: Number},
+    {name: String, count: Number}
+  ]
 });
 
 var Polls = mongoose.model('Poll', pollSchema);
@@ -32,19 +25,12 @@ var Polls = mongoose.model('Poll', pollSchema);
 var hasVoted = false;
 
 // Polls.create({
-//   pollName : 'Favorite Starter Pokemon',
-//   item1:{
-//     name: 'Charmander',
-//     count: 1
-//   },
-//   item2:{
-//     name: 'Squirtle',
-//     count: 1
-//   },
-//   item3:{
-//     name: 'Bulbasaur',
-//     count: 1
-//   }
+//   pollName : 'Best Time of Day',
+//   items: [
+//     {name: 'Morning', count: 1},
+//     {name: 'Noon', count: 1},
+//     {name: 'Sleep', count: 1}
+//   ]
 //
 // }, function(err, result){
 //   if(err){
@@ -80,18 +66,20 @@ app.post('/polls/:id', function(req, res){
     if(err){
       console.log(err);
     } else {
-      var dataArray = [
-        [foundPoll.item1.name, foundPoll.item1.count],
-        [foundPoll.item2.name, foundPoll.item2.count],
-        [foundPoll.item3.name, foundPoll.item3.count]
-      ];
-      for(var i = 0 ; i < dataArray.length; i ++){
-        if(dataArray[i][0] === vote){
-          dataArray[i][1] += 1;
-
-          // foundPoll.
+      var dataArray = [];
+      // var dataArray = [
+      //   [foundPoll.items[0].name, foundPoll.items[0].count],
+      //   [foundPoll.items[1].name, foundPoll.items[1].count],
+      //   [foundPoll.items[2].name, foundPoll.items[2].count]
+      // ];
+      for(var i = 0 ; i < foundPoll.items.length; i ++){
+        if(foundPoll.items[i].name === vote){
+          foundPoll.items[i].count += 1;
+          foundPoll.save();
         }
+        dataArray.push([foundPoll.items[i].name, foundPoll.items[i].count]);
       }
+
       res.render('show', {foundPoll:foundPoll, dataArray: dataArray});
     }
   });
@@ -105,16 +93,17 @@ app.get('/polls/:id', function(req, res){
     if(err){
       console.log(err);
     } else {
+      console.log(foundPoll);
       var dataArray = [
-        [foundPoll.item1.name, foundPoll.item1.count],
-        [foundPoll.item2.name, foundPoll.item2.count],
-        [foundPoll.item3.name, foundPoll.item3.count]
+        [foundPoll.items[0].name, foundPoll.items[0].count],
+        [foundPoll.items[1].name, foundPoll.items[1].count],
+        [foundPoll.items[2].name, foundPoll.items[2].count]
       ];
       res.render('show', {foundPoll:foundPoll, dataArray: dataArray});
     }
   });
 });
 
-app.listen('5000', function(){
+app.listen('8000', function(){
   console.log('Voting Site Live!');
 });

@@ -2,7 +2,6 @@
 
 <% var test = (foundPoll); %>
 <% var dataArray = dataArray; %>
-<% console.log(dataArray) %>
 
 <div class="text-center">
   <h1><%= foundPoll.pollName %></h1>
@@ -53,9 +52,9 @@
          <label for="">I'd Like to Vote For:</label>
          <select class="" name="vote">
            <option></option>
-           <option value=<%= foundPoll.item1.name %>><%= foundPoll.item1.name %> </option>
-           <option value=<%= foundPoll.item2.name %>><%= foundPoll.item2.name %></option>
-           <option value=<%= foundPoll.item3.name %>><%= foundPoll.item3.name %></option>
+           <option value=<%= foundPoll.items[0].name %>><%= foundPoll.items[0].name %></option>
+           <option value=<%= foundPoll.items[1].name %>><%= foundPoll.items[1].name %></option>
+           <option value=<%= foundPoll.items[2].name %>><%= foundPoll.items[2].name %></option>
          </select>
          <button type="submit" name="button">Submit</button>
        </form>
