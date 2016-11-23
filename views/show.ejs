@@ -53,9 +53,9 @@
          <label for="">I'd Like to Vote For:</label>
          <select class="" name="vote">
            <option></option>
-           <option value=<%= foundPoll.items[0].name %>><%= foundPoll.items[0].name %></option>
-           <option value=<%= foundPoll.items[1].name %>><%= foundPoll.items[1].name %></option>
-           <option value=<%= foundPoll.items[2].name %>><%= foundPoll.items[2].name %></option>
+           <% foundPoll.items.forEach(function(poll){ %>
+             <option value=<%= poll.name %>><%= poll.name %></option>
+           <% }); %>
          </select>
          <button type="submit" name="button">Submit</button>
        </form>

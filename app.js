@@ -72,20 +72,19 @@ app.post('/polls/:id', function(req, res){
       console.log(err);
     } else {
       var dataArray = [];
-      // var dataArray = [
-      //   [foundPoll.items[0].name, foundPoll.items[0].count],
-      //   [foundPoll.items[1].name, foundPoll.items[1].count],
-      //   [foundPoll.items[2].name, foundPoll.items[2].count]
-      // ];
-      for(var i = 0 ; i < foundPoll.items.length; i ++){
-        if(foundPoll.items[i].name === vote){
-          foundPoll.items[i].count += 1;
-          foundPoll.save();
-        }
-        dataArray.push([foundPoll.items[i].name, foundPoll.items[i].count]);
-      }
 
-      res.render('show', {foundPoll:foundPoll, dataArray: dataArray});
+      for(var i = 0 ; i < foundPoll.items.length; i ++){
+
+        if(foundPoll.items[i].name === vote){
+          if(!foundPoll.hasVoted){
+          foundPoll.items[i].count += 1;
+          foundPoll.hasVoted = true;
+          foundPoll.save();
+          }
+         }
+        dataArray.push([foundPoll.items[i].name, foundPoll.items[i].count]);
+       }
+       res.render('show', {foundPoll:foundPoll, dataArray: dataArray});
     }
   });
 });
@@ -93,12 +92,12 @@ app.post('/polls/:id', function(req, res){
 //Show Route
 app.get('/polls/:id', function(req, res){
   var id = req.params.id;
+  console.log(id);
 
   Polls.findById(id, function(err, foundPoll){
     if(err){
       console.log(err);
     } else {
-      console.log(foundPoll);
       var dataArray = [];
 
       for(var i = 0 ; i < foundPoll.items.length; i ++){
