@@ -24,21 +24,21 @@ var Polls = mongoose.model('Poll', pollSchema);
 
 var hasVoted = false;
 
-// Polls.create({
-//   pollName : 'Best Time of Day',
-//   items: [
-//     {name: 'Morning', count: 1},
-//     {name: 'Noon', count: 1},
-//     {name: 'Sleep', count: 1}
-//   ]
-//
-// }, function(err, result){
-//   if(err){
-//     console.log(err);
-//   } else {
-//     console.log(result);
-//   }
-// });
+Polls.create({
+  pollName : 'Favorite Starter Pokemon',
+  items: [
+    {name: 'Charmander', count: 1},
+    {name: 'Squirtle', count: 1},
+    {name: 'Bulbasaur', count: 1}
+  ]
+
+}, function(err, result){
+  if(err){
+    console.log(err);
+  } else {
+    console.log(result);
+  }
+});
 
 
 app.get('/', function(req, res){
