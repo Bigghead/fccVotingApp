@@ -14,11 +14,10 @@ mongoose.connect('mongodb://localhost/polls');
 var pollSchema = new mongoose.Schema({
   pollName : String,
   items: [
-    {name: String, count: Number},
-    {name: String, count: Number},
     {name: String, count: Number}
   ],
-  hasVoted : Boolean
+  hasVoted : Boolean,
+  userVote: String
 });
 
 var Polls = mongoose.model('Poll', pollSchema);
@@ -29,13 +28,15 @@ var newPoll = [
   {name: 'Morning', count: 1},
   {name: 'Noon', count: 1},
   {name: 'Sleep', count: 1},
-  {name: 'Coffee', count: 1}
+  {name: 'Coffee', count: 1},
+  {name: 'Break Time', count: 1}
 ];
 
 // Polls.create({
 //   pollName : 'Best Time of Day',
 //   items: newPoll,
-//   hasVoted: false
+//   hasVoted: false,
+//   userVote: ''
 //
 // }, function(err, result){
 //   if(err){
@@ -78,6 +79,7 @@ app.post('/polls/:id', function(req, res){
         if(foundPoll.items[i].name === vote){
           if(!foundPoll.hasVoted){
           foundPoll.items[i].count += 1;
+          foundPoll.userVote = vote;
           foundPoll.hasVoted = true;
           foundPoll.save();
           }
