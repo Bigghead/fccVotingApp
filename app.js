@@ -25,15 +25,16 @@ var Polls = mongoose.model('Poll', pollSchema);
 var hasVoted = false;
 
 var newPoll = [
-  {name: 'Morning', count: 1},
-  {name: 'Noon', count: 1},
-  {name: 'Sleep', count: 1},
-  {name: 'Coffee', count: 1},
-  {name: 'Break Time', count: 1}
+  {name: 'Darth Vader', count: 1},
+  {name: 'Thanos', count: 1},
+  {name: 'King Joffrey', count: 1},
+  {name: 'Nyan Cat', count: 1},
+  {name: 'Ice King', count: 1},
+  {name: 'Future You', count: 1},
 ];
 
 // Polls.create({
-//   pollName : 'Best Time of Day',
+//   pollName : 'Favorite Villain',
 //   items: newPoll,
 //   hasVoted: false,
 //   userVote: ''
