@@ -17,20 +17,25 @@ var pollSchema = new mongoose.Schema({
     {name: String, count: Number},
     {name: String, count: Number},
     {name: String, count: Number}
-  ]
+  ],
+  hasVoted : Boolean
 });
 
 var Polls = mongoose.model('Poll', pollSchema);
 
 var hasVoted = false;
 
+var newPoll = [
+  {name: 'Morning', count: 1},
+  {name: 'Noon', count: 1},
+  {name: 'Sleep', count: 1},
+  {name: 'Coffee', count: 1}
+];
+
 // Polls.create({
-//   pollName : 'Favorite Starter Pokemon',
-//   items: [
-//     {name: 'Charmander', count: 1},
-//     {name: 'Squirtle', count: 1},
-//     {name: 'Bulbasaur', count: 1}
-//   ]
+//   pollName : 'Best Time of Day',
+//   items: newPoll,
+//   hasVoted: false
 //
 // }, function(err, result){
 //   if(err){
@@ -94,11 +99,11 @@ app.get('/polls/:id', function(req, res){
       console.log(err);
     } else {
       console.log(foundPoll);
-      var dataArray = [
-        [foundPoll.items[0].name, foundPoll.items[0].count],
-        [foundPoll.items[1].name, foundPoll.items[1].count],
-        [foundPoll.items[2].name, foundPoll.items[2].count]
-      ];
+      var dataArray = [];
+
+      for(var i = 0 ; i < foundPoll.items.length; i ++){
+        dataArray.push([foundPoll.items[i].name, foundPoll.items[i].count]);
+      }
       res.render('show', {foundPoll:foundPoll, dataArray: dataArray});
     }
   });

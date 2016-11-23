@@ -1,5 +1,13 @@
 body{
-  
+
+}
+.navbar-default{
+  margin-bottom: 0;
+}
+.poll-landing{
+  height: 100%;
+  background: url('https://hd.unsplash.com/photo-1467173572719-f14b9fb86e5f');
+  background-size: cover;
 }
 
 #poll-container{

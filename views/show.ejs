@@ -31,8 +31,9 @@
        data.addColumn('number', 'Percentage');
 
        var dataArray = <%- JSON.stringify(dataArray) %>;
-       console.log(dataArray);
        data.addRows(dataArray);
+       console.log(dataArray);
+       console.log(data);
        // Set chart options
        var options = {'title':foundPoll.pollName,
                       'width':500,
