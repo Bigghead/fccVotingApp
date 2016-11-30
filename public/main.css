@@ -24,6 +24,7 @@ body{
 }
 
 .voted-graph{
-  display: inline-block;
-  margin: 0 auto !important;
+  display: inline-block !important;
+  margin-left:auto !important;
+  margin-right: auto !important;
 }
