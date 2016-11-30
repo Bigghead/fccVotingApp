@@ -66,8 +66,11 @@ app.get('/polls', function(req, res){
 //Update Survey
 app.post('/polls/:id', function(req, res){
   var vote = req.body.vote;
-  console.log(vote);
+  console.log('Vote:' + vote);
   var id = req.params.id;
+  console.log('ID: ' + id);
+  console.log(req.cookies);
+  console.log(req.cookies[id.toString()] !== '');
 
   Polls.findById(id, function(err, foundPoll){
     if(err){
@@ -78,29 +81,25 @@ app.post('/polls/:id', function(req, res){
       for(var i = 0 ; i < foundPoll.items.length; i ++){
 
         if(foundPoll.items[i].name === vote){
-          var stringID = id.toString();
-          if(req.cookies.stringID === '' || req.cookies.stringID === null){ //if user hasn't voted
-          res.cookie(stringID, vote);
+          if(req.cookies[id.toString()] === undefined || req.cookies[id.toString()] === ''){
+          res.cookie(id, vote);
           foundPoll.items[i].count += 1;
-          console.log(req.cookies);
           foundPoll.save();
-          }
+           }
          }
-        dataArray.push([foundPoll.items[i].name, foundPoll.items[i].count]);
+         dataArray.push([foundPoll.items[i].name, foundPoll.items[i].count]);
+        }
        }
-       if(req.cookies.stringID){
-         res.send('Ha Ha!');
-       } else {
        res.render('show', {foundPoll:foundPoll, dataArray: dataArray});
-     }
-    }
   });
 });
 
 //Show Route
 app.get('/polls/:id', function(req, res){
   var id = req.params.id;
+  console.log(id);
   console.log(req.cookies);
+  console.log(req.cookies[id.toString()]);
 
   Polls.findById(id, function(err, foundPoll){
     if(err){
@@ -111,7 +110,11 @@ app.get('/polls/:id', function(req, res){
       for(var i = 0 ; i < foundPoll.items.length; i ++){
         dataArray.push([foundPoll.items[i].name, foundPoll.items[i].count]);
       }
+      if(req.cookies.id === undefined){
       res.render('show', {foundPoll:foundPoll, dataArray: dataArray});
+    } else {
+      res.send('Ha Ha!');
+     }
     }
   });
 });

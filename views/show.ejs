@@ -8,9 +8,6 @@
   <p>
     Some random description about <%= foundPoll.pollName %>
   </p>
-  <% if(foundPoll.hasVoted){   %>
-    <h3>You Have Voted For: <%= foundPoll.userVote %></h3>
-    <% }   %>
   </div>
 
   <script type="text/javascript">
@@ -60,7 +57,7 @@
     <select class="" name="vote">
       <option></option>
       <% foundPoll.items.forEach(function(poll){ %>
-        <option value=<%= poll.name %>><%= poll.name %></option>
+        <option value='<%= poll.name %>'><%= poll.name %></option>
         <% }); %>
       </select>
       <button type="submit" name="button">Submit</button>
