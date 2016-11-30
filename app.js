@@ -90,7 +90,11 @@ app.post('/polls/:id', function(req, res){
          dataArray.push([foundPoll.items[i].name, foundPoll.items[i].count]);
         }
        }
-       res.render('show', {foundPoll:foundPoll, dataArray: dataArray});
+       if(req.cookies[id.toString()] === undefined || req.cookies[id.toString()] === ''){
+       res.render('show', {foundPoll:foundPoll, dataArray: dataArray, cookies: req.cookies});
+     } else {
+       res.render('hasVoted', {foundPoll:foundPoll, dataArray: dataArray, storedCookie: req.cookies[id.toString()]});
+     }
   });
 });
 
