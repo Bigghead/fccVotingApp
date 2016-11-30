@@ -49,7 +49,7 @@ var newPoll = [
 
 
 app.get('/', function(req, res){
-  res.render('landing');
+  res.redirect('polls');
 });
 
 //Index Route
