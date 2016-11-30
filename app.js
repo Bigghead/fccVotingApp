@@ -110,11 +110,11 @@ app.get('/polls/:id', function(req, res){
       for(var i = 0 ; i < foundPoll.items.length; i ++){
         dataArray.push([foundPoll.items[i].name, foundPoll.items[i].count]);
       }
-      if(req.cookies.id === undefined){
-      res.render('show', {foundPoll:foundPoll, dataArray: dataArray});
+      if(req.cookies[id.toString()] === undefined || req.cookies[id.toString()] === ''){
+      res.render('show', {foundPoll:foundPoll, dataArray: dataArray, cookies: req.cookies});
     } else {
-      res.send('Ha Ha!');
-     }
+      res.render('hasVoted', {foundPoll:foundPoll, dataArray: dataArray, storedCookie: req.cookies[id.toString()]});
+    }
     }
   });
 });

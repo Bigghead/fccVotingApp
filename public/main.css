@@ -23,6 +23,7 @@ body{
   border-radius: 10px;
 }
 
-#chart_div{
-  margin:auto;
+.voted-graph{
+  display: inline-block;
+  margin: 0 auto !important;
 }

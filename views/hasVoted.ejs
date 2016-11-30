@@ -2,13 +2,13 @@
 
 <% var test = (foundPoll); %>
 <% var dataArray = dataArray; %>
-<% var id = foundPoll._id.toString(); %>
 
 <div class="text-center">
   <h1><%= foundPoll.pollName %></h1>
   <p>
     Some random description about <%= foundPoll.pollName %>
   </p>
+  <h2>You Have Voted For: <%= storedCookie %></h2>
   </div>
 
   <script type="text/javascript">
@@ -47,29 +47,11 @@
 </script>
 
 
-<div class="container">
-    <table>
-      <tr>
-        <td>
-  <form action="/polls/<%= foundPoll._id %>" method="post">
-    <label for="">I'd Like to Vote For:</label>
-    <select class="" name="vote">
-      <option></option>
-      <% foundPoll.items.forEach(function(poll){ %>
-        <option value='<%= poll.name %>'><%= poll.name %></option>
-        <% }); %>
-      </select>
-      <button type="submit" name="button">Submit</button>
-    </form>
-  </td>
-  <td>
-    <div id='chart_div'>
+
+    <div id='chart_div' class='voted-graph' align='center'>
 
     </div>
-  </td>
-  </tr>
-  </table>
-</div>
+
 
 
   <% include partials/footer %>
