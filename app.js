@@ -1,28 +1,28 @@
 var express = require('express'),
     mongoose = require('mongoose'),
     bodyParser = require('body-parser'),
+    cookieParser = require('cookie-parser'),
     app = express();
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended : true}));
+app.use(cookieParser());
 app.use(express.static(__dirname + '/public'));
 
 
 //mongoose/mongo connection
+mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/polls');
 
 var pollSchema = new mongoose.Schema({
   pollName : String,
   items: [
     {name: String, count: Number}
-  ],
-  hasVoted : Boolean,
-  userVote: String
+  ]
 });
 
 var Polls = mongoose.model('Poll', pollSchema);
 
-var hasVoted = false;
 
 var newPoll = [
   {name: 'Darth Vader', count: 1},
@@ -78,16 +78,21 @@ app.post('/polls/:id', function(req, res){
       for(var i = 0 ; i < foundPoll.items.length; i ++){
 
         if(foundPoll.items[i].name === vote){
-          if(!foundPoll.hasVoted){
+          var stringID = id.toString();
+          if(req.cookies.stringID === '' || req.cookies.stringID === null){ //if user hasn't voted
+          res.cookie(stringID, vote);
           foundPoll.items[i].count += 1;
-          foundPoll.userVote = vote;
-          foundPoll.hasVoted = true;
+          console.log(req.cookies);
           foundPoll.save();
           }
          }
         dataArray.push([foundPoll.items[i].name, foundPoll.items[i].count]);
        }
+       if(req.cookies.stringID){
+         res.send('Ha Ha!');
+       } else {
        res.render('show', {foundPoll:foundPoll, dataArray: dataArray});
+     }
     }
   });
 });
@@ -95,7 +100,7 @@ app.post('/polls/:id', function(req, res){
 //Show Route
 app.get('/polls/:id', function(req, res){
   var id = req.params.id;
-  console.log(id);
+  console.log(req.cookies);
 
   Polls.findById(id, function(err, foundPoll){
     if(err){
@@ -111,6 +116,6 @@ app.get('/polls/:id', function(req, res){
   });
 });
 
-app.listen('8000', function(){
+app.listen('7000', function(){
   console.log('Voting Site Live!');
 });
