@@ -63,6 +63,19 @@ app.get('/polls', function(req, res){
   });
 });
 
+//login Route
+app.get('/login', function(req, res){
+  res.render('login');
+});
+
+app.post('/login', function(req, res){
+  var userName = req.body.userName;
+  var password = req.body.Password;
+
+  console.log(userName +  password);
+  res.send(userName + password);
+});
+
 //Update Survey
 app.post('/polls/:id', function(req, res){
   var vote = req.body.vote;
