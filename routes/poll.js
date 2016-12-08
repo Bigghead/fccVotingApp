@@ -42,7 +42,6 @@ router.post('/polls/:id', function(req, res){
 //Show Route
 router.get('/polls/:id', function(req, res){
   var id = req.params.id;
-  console.log(id);
 
   Polls.findById(id, function(err, foundPoll){
     if(err){

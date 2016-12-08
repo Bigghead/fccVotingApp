@@ -1,8 +1,9 @@
-var express  = require('express'),
-    mongoose = require('mongoose'),
-    router   = express.Router(),
+var express = require('express'),
+    bodyParser = require('body-parser'),
     passport = require('passport'),
-    User     = require('../models/userSchema.js');
+    localStrategy = require('passport-local'),
+    User = require('../models/userSchema.js'),
+    router  = express.Router();
 
 
 //========REGISTER ROUTES=======
@@ -10,7 +11,8 @@ router.get('/register', function(req, res){
   res.render('registerForm');
 });
 
-router.post('/register', function(req, res){
+router.post('/register', bodyParser.urlencoded({extended: false}), function(req, res){
+
   var username = req.body.username;
   var password = req.body.password;
 
@@ -18,7 +20,7 @@ router.post('/register', function(req, res){
     function(err, registeredUser){
       if(err){
         console.log(err);
-        res.render('resgisterForm');
+        res.render('registerForm');
       } else {
         passport.authenticate('local')(req, res, function(){
           res.redirect('/polls');
@@ -33,12 +35,18 @@ router.get('/login', function(req, res){
   res.render('login');
 });
 
-router.post('/login', function(req, res){
-  var userName = req.body.userName;
-  var password = req.body.Password;
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/polls',
+  failureRedirect: '/login'
+}), function(req, res){
 
-  console.log(userName +  password);
-  res.send(userName + password);
+});
+
+
+//===========LOGOUT=========
+router.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/polls');
 });
 
 
