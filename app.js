@@ -28,17 +28,23 @@ app.use(express.static(__dirname + '/public'));
 app.use(Session({
   secret:'This is Sparta!',
   resave: false,
-  saveUnitialized : false
+  saveUninitialized: false
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-//use passport to authenticate
-passpost.use(new localStrategy(userSchema.authenticate()));
+//middleware to check if user is authenticated
+app.use(function(req, res, next){
+  res.locals.currentUser = req.user;
+  next();
+});
 
-passport.serializeUser(userSchema.serializeUser());
-passport.deserializeUser(userSchema.deserializeUser());
+//use passport to authenticate
+// passport.use(new localStrategy(userSchema.authenticate()));
+//
+// passport.serializeUser(userSchema.serializeUser());
+// passport.deserializeUser(userSchema.deserializeUser());
 
 
 //Test for adding new polls
