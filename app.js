@@ -9,11 +9,13 @@ var express      = require('express'),
 
     //models imports
     Polls        = require('./models/pollSchema.js'),
+    User         = require('./models/userSchema.js'),
     app          = express();
 
 //Route imports
 var indexRoute = require('./routes/index.js'),
     pollRoute  = require('./routes/poll.js');
+    authRoute  = require('./routes/authentication.js');
 
 //mongoose/mongo connection
 mongoose.Promise = global.Promise;
@@ -71,20 +73,7 @@ app.use(function(req, res, next){
 //tell express to use routes
 app.use(indexRoute);
 app.use(pollRoute);
-
-
-//login Route
-app.get('/login', function(req, res){
-  res.render('login');
-});
-
-app.post('/login', function(req, res){
-  var userName = req.body.userName;
-  var password = req.body.Password;
-
-  console.log(userName +  password);
-  res.send(userName + password);
-});
+app.use(authRoute);
 
 
 
