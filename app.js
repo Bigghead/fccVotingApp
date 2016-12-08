@@ -1,8 +1,20 @@
-var express = require('express'),
-    mongoose = require('mongoose'),
-    bodyParser = require('body-parser'),
+var express      = require('express'),
+    mongoose     = require('mongoose'),
+    bodyParser   = require('body-parser'),
     cookieParser = require('cookie-parser'),
-    app = express();
+    passport     = require('passport'),
+    localStrategy = require('passport-local'),
+    passportLocalMongoose = require('passport-local-mongoose'),
+
+    //models imports
+    Polls        = require('./models/polls.js'),
+    app          = express();
+
+//Route imports
+var indexRoute = require('./routes/index.js');
+
+//tell express to use routes
+app.use(indexRoute);
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended : true}));
@@ -14,54 +26,6 @@ app.use(express.static(__dirname + '/public'));
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/polls');
 
-var pollSchema = new mongoose.Schema({
-  pollName : String,
-  items: [
-    {name: String, count: Number}
-  ]
-});
-
-var Polls = mongoose.model('Poll', pollSchema);
-
-
-var newPoll = [
-  {name: 'Darth Vader', count: 1},
-  {name: 'Thanos', count: 1},
-  {name: 'King Joffrey', count: 1},
-  {name: 'Nyan Cat', count: 1},
-  {name: 'Ice King', count: 1},
-  {name: 'Future You', count: 1},
-];
-
-// Polls.create({
-//   pollName : 'Favorite Villain',
-//   items: newPoll,
-//   hasVoted: false,
-//   userVote: ''
-//
-// }, function(err, result){
-//   if(err){
-//     console.log(err);
-//   } else {
-//     console.log(result);
-//   }
-// });
-
-
-app.get('/', function(req, res){
-  res.redirect('polls');
-});
-
-//Index Route
-app.get('/polls', function(req, res){
-  Polls.find({}, function(err, polls){
-    if(err){
-      console.log(err);
-    } else {
-      res.render('polls', {polls: polls});
-    }
-  });
-});
 
 //login Route
 app.get('/login', function(req, res){
