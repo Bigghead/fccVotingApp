@@ -1,6 +1,6 @@
 var express = require('express'),
     router  = express.Router(),
-    Polls   = require('../models/polls.js');
+    Polls   = require('../models/pollSchema.js');
 
 router.get('/', function(req, res){
   res.redirect('polls');

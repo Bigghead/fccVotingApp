@@ -48,27 +48,25 @@
 
 
 <div class="container">
-    <table>
-      <tr>
-        <td>
-  <form action="/polls/<%= foundPoll._id %>" method="post">
-    <label for="">I'd Like to Vote For:</label>
-    <select class="" name="vote">
-      <option></option>
-      <% foundPoll.items.forEach(function(poll){ %>
-        <option value='<%= poll.name %>'><%= poll.name %></option>
-        <% }); %>
-      </select>
-      <button type="submit" name="button">Submit</button>
-    </form>
-  </td>
-  <td>
-    <div id='chart_div'>
-
+  <div class="row">
+    <div class="col-lg-2">
+      <form action="/polls/<%= foundPoll._id %>" method="post">
+        <label for="">I'd Like to Vote For:</label>
+        <select class="" name="vote">
+          <option></option>
+          <% foundPoll.items.forEach(function(poll){ %>
+            <option value='<%= poll.name %>'><%= poll.name %></option>
+            <% }); %>
+          </select>
+          <button type="submit" name="button">Submit</button>
+        </form>
     </div>
-  </td>
-  </tr>
-  </table>
+    <div class="col-lg-10">
+     <div id='chart_div'>
+
+     </div>
+   </div>
+  </div>
 </div>
 
 
