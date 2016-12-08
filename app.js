@@ -5,6 +5,7 @@ var express      = require('express'),
     passport     = require('passport'),
     localStrategy = require('passport-local'),
     passportLocalMongoose = require('passport-local-mongoose'),
+    Session      = require('express-session'),
 
     //models imports
     Polls        = require('./models/pollSchema.js'),
@@ -14,19 +15,30 @@ var express      = require('express'),
 var indexRoute = require('./routes/index.js'),
     pollRoute  = require('./routes/poll.js');
 
-//tell express to use routes
-app.use(indexRoute);
-app.use(pollRoute);
+//mongoose/mongo connection
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/polls');
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(cookieParser());
 app.use(express.static(__dirname + '/public'));
 
+//Session / passport
+app.use(Session({
+  secret:'This is Sparta!',
+  resave: false,
+  saveUnitialized : false
+}));
 
-//mongoose/mongo connection
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/polls');
+app.use(passport.initialize());
+app.use(passport.session());
+
+//use passport to authenticate
+passpost.use(new localStrategy(userSchema.authenticate()));
+
+passport.serializeUser(userSchema.serializeUser());
+passport.deserializeUser(userSchema.deserializeUser());
 
 
 //Test for adding new polls
@@ -49,6 +61,12 @@ mongoose.connect('mongodb://localhost/polls');
 //     console.log('Success');
 //   }
 // });
+
+//tell express to use routes
+app.use(indexRoute);
+app.use(pollRoute);
+
+
 //login Route
 app.get('/login', function(req, res){
   res.render('login');
