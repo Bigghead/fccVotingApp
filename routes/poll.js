@@ -12,31 +12,28 @@ router.post('/polls/:id', function(req, res){
   console.log('Vote:' + vote);
   var id = req.params.id;
   console.log('ID: ' + id);
+  var dataArray = [];
 
+  if(req.cookies[id.toString()] === undefined || req.cookies[id.toString()] === ''){
+  res.cookie(id, vote);
   Polls.findById(id, function(err, foundPoll){
     if(err){
       console.log(err);
     } else {
-      var dataArray = [];
 
       for(var i = 0 ; i < foundPoll.items.length; i ++){
 
         if(foundPoll.items[i].name === vote){
-          if(req.cookies[id.toString()] === undefined || req.cookies[id.toString()] === ''){
-          res.cookie(id, vote);
           foundPoll.items[i].count += 1;
           foundPoll.save();
-           }
          }
          dataArray.push([foundPoll.items[i].name, foundPoll.items[i].count]);
         }
-       }
-       if(req.cookies[id.toString()] === undefined || req.cookies[id.toString()] === ''){
-       res.render('show', {foundPoll:foundPoll, dataArray: dataArray, cookies: req.cookies});
-     } else {
-       res.render('hasVoted', {foundPoll:foundPoll, dataArray: dataArray, storedCookie: req.cookies[id.toString()]});
-     }
+
+        res.render('hasVoted', {foundPoll:foundPoll, dataArray: dataArray, storedCookie: req.cookies[id.toString()]});
+      }
   });
+ }
 });
 
 //Show Route
