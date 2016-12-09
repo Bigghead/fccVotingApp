@@ -6,11 +6,11 @@ var express      = require('express'),
     LocalStrategy = require('passport-local'),
     passportLocalMongoose = require('passport-local-mongoose'),
     Session      = require('express-session'),
+    app          = express();
 
     //models imports
-    Polls        = require('./models/pollSchema.js'),
-    User         = require('./models/userSchema.js'),
-    app          = express();
+var Polls  = require('./models/pollSchema.js'),
+    User   = require('./models/userSchema.js');
 
 //Route imports
 var indexRoute = require('./routes/index.js'),

@@ -11,7 +11,7 @@ router.get('/register', function(req, res){
   res.render('registerForm');
 });
 
-router.post('/register', bodyParser.urlencoded({extended: false}), function(req, res){
+router.post('/register', bodyParser.urlencoded({extended: true}), function(req, res){
 
   var username = req.body.username;
   var password = req.body.password;
@@ -38,9 +38,7 @@ router.get('/login', function(req, res){
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/polls',
   failureRedirect: '/login'
-}), function(req, res){
-
-});
+}));
 
 
 //===========LOGOUT=========
