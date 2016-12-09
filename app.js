@@ -14,8 +14,9 @@ var Polls  = require('./models/pollSchema.js'),
 
 //Route imports
 var indexRoute = require('./routes/index.js'),
-    pollRoute  = require('./routes/poll.js');
-    authRoute  = require('./routes/authentication.js');
+    pollRoute  = require('./routes/poll.js'),
+    authRoute  = require('./routes/authentication.js'),
+    userRoute  = require('./routes/userRoute.js');
 
 //mongoose/mongo connection
 mongoose.Promise = global.Promise;
@@ -45,6 +46,7 @@ app.use(function(req, res, next){
 app.use(indexRoute);
 app.use(pollRoute);
 app.use(authRoute);
+app.use(userRoute);
 
 //use passport to authenticate
 passport.use(new LocalStrategy(User.authenticate()));
