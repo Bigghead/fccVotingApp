@@ -28,6 +28,8 @@ app.use(bodyParser.urlencoded({extended : true}));
 app.use(cookieParser());
 app.use(express.static(__dirname + '/public'));
 
+
+
 //Session / passport
 app.use(Session({
   secret: 'This is Sparta Again',

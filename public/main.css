@@ -29,3 +29,12 @@ body{
   margin-left:auto !important;
   margin-right: auto !important;
 }
+
+.askUserForm{
+  width: 50%;
+  margin: 5% auto;
+}
+
+.doneUserForm{
+  display: none;
+}
