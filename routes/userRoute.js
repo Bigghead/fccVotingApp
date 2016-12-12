@@ -1,18 +1,46 @@
 var express = require('express'),
     mongoose = require('mongoose'),
     router  = express.Router(),
-    Polls   = require('../models/pollSchema.js');
+    Polls   = require('../models/pollSchema.js'),
+    User    = require('../models/userSchema.js');
 
-router.get('/userPolls', function(req, res){
+router.get('/:id/userPolls', function(req, res){
   res.send('Here are your Polls');
 });
 
-router.get('/userPolls/createPoll', function(req, res){
-  res.render('newPollPage');
+router.get('/:id/userPolls/createPoll', function(req, res){
+  var id = req.params.id;
+  res.render('newPollPage', {id : id});
 });
 
-router.post('/userPolls/createPoll/newPoll', function(req, res){
-  res.send(req.body.pollOptions.split(','));
+router.post('/:id/userPolls/createPoll', function(req, res){
+  console.log(req.body.pollOptions.split(','));
+  var id = req.params.id;
+  var pollOptions = req.body.pollOptions.split(',');
+  var pollName = req.body.pollName;
+  var userPollData = [];
+  for(var i =  0 ; i < pollOptions.length; i ++){
+    userPollData.push({name : pollOptions[i], count: 1});
+  }
+  User.findById(id, function(err, foundUser){
+    if(err){
+      console.log(err);
+    } else {
+      Polls.create({
+        pollName : pollName,
+        items : userPollData
+      }, function(err, madePoll){
+        if(err){
+          console.log(err);
+        } else {
+          foundUser.polls.push(madePoll);
+          madePoll.save();
+          foundUser.save();
+          res.redirect('/polls');
+        }
+      });
+    }
+  });
 });
 
 
