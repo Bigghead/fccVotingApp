@@ -14,7 +14,7 @@ var Polls  = require('./models/pollSchema.js'),
 
 //Route imports
 var indexRoute = require('./routes/index.js'),
-    pollRoute  = require('./routes/poll.js'),
+    pollRoute  = require('./routes/polls.js'),
     authRoute  = require('./routes/authentication.js'),
     userRoute  = require('./routes/userRoute.js');
 

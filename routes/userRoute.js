@@ -11,6 +11,10 @@ router.get('/userPolls/createPoll', function(req, res){
   res.render('newPollPage');
 });
 
+router.post('/userPolls/createPoll/newPoll', function(req, res){
+  res.send(req.body.pollOptions.split(','));
+});
+
 
 function isLoggedIn(req, res, next){
   if(req.isAuthenticated()){

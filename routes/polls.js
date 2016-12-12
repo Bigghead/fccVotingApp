@@ -9,9 +9,7 @@ router.use(cookieParser());
 //Add Survey Route
 router.post('/polls/:id', function(req, res){
   var vote = req.body.vote;
-  console.log('Vote:' + vote);
   var id = req.params.id;
-  console.log('ID: ' + id);
   var dataArray = [];
 
   if(req.cookies[id.toString()] === undefined || req.cookies[id.toString()] === ''){
