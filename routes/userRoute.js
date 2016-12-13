@@ -7,7 +7,22 @@ var express = require('express'),
 router.get('/:id/userPolls', isLoggedIn,function(req, res){
   var id = req.params.id;
   User.findById(id).populate('polls').exec(function(err, foundUser){
-    res.render('allUserPoll', {foundUser : foundUser, Polls: Polls});
+    res.render('allUserPoll', {foundUser : foundUser});
+  });
+});
+
+router.post('/:id/userPolls', function(req, res){
+  //this id is the poll id, and not the user's
+  var id = req.params.id;
+  console.log(id);
+
+  Polls.findByIdAndRemove(id, function(err, success){
+    if(err){
+      console.log(err);
+    } else{
+      console.log('Removed' );
+      res.redirect('/polls');
+    }
   });
 });
 
