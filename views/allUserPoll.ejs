@@ -10,7 +10,7 @@
           <h3>
             <a href='/polls/<%= userPoll._id %>'><%= userPoll.pollName %></a>
             <span id= '<%= userPoll._id %>'class='pull-right link'>
-              <form method='post' action='/<%= userPoll._id %>/userPolls'>
+              <form method='post' action='/<%= foundUser._id %>/userPolls/<%= userPoll._id %>'>
                <button class='btn btn-danger'name='<%= userPoll._id %>'>Delete</button>
               </form>
             </span>

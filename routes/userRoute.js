@@ -11,12 +11,12 @@ router.get('/:id/userPolls', isLoggedIn,function(req, res){
   });
 });
 
-router.post('/:id/userPolls', function(req, res){
+router.post('/:userID/userPolls/:pollID', function(req, res){
+  var userID = req.params.userID;
   //this id is the poll id, and not the user's
-  var id = req.params.id;
-  console.log(id);
+  var pollID = req.params.pollID;
 
-  Polls.findByIdAndRemove(id, function(err, success){
+  Polls.findByIdAndRemove(pollID, function(err, success){
     if(err){
       console.log(err);
     } else{
@@ -28,37 +28,41 @@ router.post('/:id/userPolls', function(req, res){
 
 router.get('/:id/userPolls/createPoll', isLoggedIn, function(req, res){
   var id = req.params.id;
+  console.log(id);
   res.render('newPollPage', {id : id});
 });
 
 router.post('/:id/userPolls/createPoll', isLoggedIn, function(req, res){
-  console.log(req.body.pollOptions.split(','));
-  var id = req.params.id;
-  var pollOptions = req.body.pollOptions.split(',');
-  var pollName = req.body.pollName;
-  var userPollData = [];
-  for(var i =  0 ; i < pollOptions.length; i ++){
-    userPollData.push({name : pollOptions[i], count: 1});
-  }
-  User.findById(id, function(err, foundUser){
-    if(err){
-      console.log(err);
-    } else {
-      Polls.create({
-        pollName : pollName,
-        items : userPollData
-      }, function(err, madePoll){
-        if(err){
-          console.log(err);
-        } else {
-          foundUser.polls.push(madePoll);
-          madePoll.save();
-          foundUser.save();
-          res.redirect('/polls');
-        }
-      });
-    }
-  });
+  res.send('working');
+  // var id = req.params.id;
+  // console.log(id);
+  // console.log('id: ' + id + typeof id);
+  // var pollOptions = req.body.pollOptions.split(',');
+  // var pollName = req.body.pollName;
+  // var userPollData = [];
+  // for(var i =  0 ; i < pollOptions.length; i ++){
+  //   userPollData.push({name : pollOptions[i], count: 1});
+  // }
+  // console.log(userPollData);
+  // User.findById(id, function(err, foundUser){
+  //   if(err){
+  //     console.log(err);
+  //   } else {
+  //     Polls.create({
+  //       pollName : pollName,
+  //       items : userPollData
+  //     }, function(err, madePoll){
+  //       if(err){
+  //         console.log(err);
+  //       } else {
+  //         foundUser.polls.push(madePoll);
+  //         madePoll.save();
+  //         foundUser.save();
+  //         res.redirect('/polls');
+  //       }
+  //     });
+  //   }
+  // });
 });
 
 
