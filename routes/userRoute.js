@@ -4,16 +4,16 @@ var express = require('express'),
     Polls   = require('../models/pollSchema.js'),
     User    = require('../models/userSchema.js');
 
-router.get('/:id/userPolls', function(req, res){
+router.get('/:id/userPolls', isLoggedIn,function(req, res){
   res.send('Here are your Polls');
 });
 
-router.get('/:id/userPolls/createPoll', function(req, res){
+router.get('/:id/userPolls/createPoll', isLoggedIn, function(req, res){
   var id = req.params.id;
   res.render('newPollPage', {id : id});
 });
 
-router.post('/:id/userPolls/createPoll', function(req, res){
+router.post('/:id/userPolls/createPoll', isLoggedIn, function(req, res){
   console.log(req.body.pollOptions.split(','));
   var id = req.params.id;
   var pollOptions = req.body.pollOptions.split(',');
