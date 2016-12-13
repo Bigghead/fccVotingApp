@@ -1,0 +1,21 @@
+<% include partials/header %>
+<% console.log(foundUser); %>
+<div class="container-fluid">
+  <h1 class='text-center'>All Polls for <em><%= foundUser.username %></em></h1>
+
+  <% foundUser.polls.forEach(function(userPoll){ %>
+
+      <div class='col-lg-10'>
+       <div id='singlePoll' class="text-center userPolls">
+       <a href='/polls/<%= userPoll._id %>'</a>
+       <h3><%= userPoll.pollName %></h3>
+      </div>
+      </div>
+      <div class='col-lg-2'>
+        <button class='btn btn-danger'>Delete</button>
+      </div>
+
+  <%  })  %>
+</div>
+
+<% include partials/footer %>

@@ -24,6 +24,9 @@ body{
   border-radius: 10px;
 }
 
+.userPolls{
+}
+
 .voted-graph{
   display: inline-block !important;
   margin-left:auto !important;

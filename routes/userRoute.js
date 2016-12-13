@@ -5,7 +5,10 @@ var express = require('express'),
     User    = require('../models/userSchema.js');
 
 router.get('/:id/userPolls', isLoggedIn,function(req, res){
-  res.send('Here are your Polls');
+  var id = req.params.id;
+  User.findById(id).populate('polls').exec(function(err, foundUser){
+    res.render('allUserPoll', {foundUser : foundUser});
+  });
 });
 
 router.get('/:id/userPolls/createPoll', isLoggedIn, function(req, res){
