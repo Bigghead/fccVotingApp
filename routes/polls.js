@@ -34,6 +34,22 @@ router.post('/polls/:id', function(req, res){
  }
 });
 
+router.post('/polls/:id/addedVote', function(req, res){
+  var id = req.params.id;
+  var addedVote = req.body.addedUserPoll;
+  Polls.findById(id, function(err, foundPoll){
+    if(err){
+      console.log(err);
+    } else {
+      console.log(foundPoll);
+      foundPoll.items.push({name: addedVote, count: 1});
+      res.cookie(id, addedVote);
+      foundPoll.save();
+      res.redirect('/polls');
+    }
+  });
+});
+
 //Show Route
 router.get('/polls/:id', function(req, res){
   var id = req.params.id;
