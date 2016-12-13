@@ -25,6 +25,13 @@ body{
 }
 
 .userPolls{
+  margin: auto;
+  text-align: center;
+}
+
+.link {
+  margin-top: -10px;
+  margin-right: 5px;
 }
 
 .voted-graph{

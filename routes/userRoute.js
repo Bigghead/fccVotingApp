@@ -7,7 +7,7 @@ var express = require('express'),
 router.get('/:id/userPolls', isLoggedIn,function(req, res){
   var id = req.params.id;
   User.findById(id).populate('polls').exec(function(err, foundUser){
-    res.render('allUserPoll', {foundUser : foundUser});
+    res.render('allUserPoll', {foundUser : foundUser, Polls: Polls});
   });
 });
 
