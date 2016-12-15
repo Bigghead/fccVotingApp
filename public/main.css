@@ -1,6 +1,10 @@
 body{
 
 }
+
+a:hover{
+  cursor: hand
+}
 .navbar-default{
   margin-bottom: 0;
 }
@@ -11,11 +15,11 @@ body{
 }
 
 #poll-container{
+  /*font-family:  ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;*/
   border: 2px solid black;
   border-radius: 10px;
   margin-top: 20px;
-  background-color: lightgray;
-}
+  background-color: #F0F8FF}
 
 #singlePoll{
   background-color: black;
@@ -41,6 +45,14 @@ body{
 }
 
 #footer{
- height: 30px;
- background-color: lightblue;
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  height: 35px;
+  width: 100%;
+  background-color: #00CED1 ;
+}
+
+#footer p{
+  margin: 5px 0;
 }
