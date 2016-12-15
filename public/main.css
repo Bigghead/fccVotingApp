@@ -39,3 +39,8 @@ body{
   margin-left:auto !important;
   margin-right: auto !important;
 }
+
+#footer{
+ height: 30px;
+ background-color: lightblue;
+}

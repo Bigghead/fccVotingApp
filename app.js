@@ -23,7 +23,7 @@ var indexRoute = require('./routes/index.js'),
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/polls');
 
-seed();
+//seed();
 
 
 app.set('view engine', 'ejs');
