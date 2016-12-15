@@ -16,11 +16,14 @@ var Polls  = require('./models/pollSchema.js'),
 var indexRoute = require('./routes/index.js'),
     pollRoute  = require('./routes/polls.js'),
     authRoute  = require('./routes/authentication.js'),
-    userRoute  = require('./routes/userRoute.js');
+    userRoute  = require('./routes/userRoute.js'),
+    seed       = require('./routes/seedData.js');
 
 //mongoose/mongo connection
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/polls');
+
+seed();
 
 
 app.set('view engine', 'ejs');
