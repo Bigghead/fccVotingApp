@@ -21,6 +21,8 @@ var indexRoute = require('./routes/index.js'),
 
 //mongoose/mongo connection
 mongoose.Promise = global.Promise;
+var url = process.env.url;
+console.log(url);
 mongoose.connect('mongodb://localhost/polls');
 
 //seed();

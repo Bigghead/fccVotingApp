@@ -61,10 +61,32 @@
           <button class='btn btn-primary'type="submit" name="button">Submit</button>
         </form>
         <% if (currentUser){ %>
-          <form action='/polls/<%= foundPoll._id %>/addedVote' method='post'>
-            <input type='text' name='addedUserPoll' placeholder='Or Add A New Option'>
-            <button class='btn btn-info' type='submit' style='margin-top: 5px;'>Add New Option</button>
-          </form>
+          <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Or Add A New Option</button>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add A New Option</h4>
+      </div>
+      <div class="modal-body">
+      <form action='/polls/<%= foundPoll._id %>/addedVote' method='post'>
+        <input class='form-control'type='text' name='addedUserPoll' placeholder='New Option'>
+        <button class='btn btn-info form-control' type='submit' style='margin-top: 5px;'>Add New Option</button>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
         <%  }  %>
     </div>
 
