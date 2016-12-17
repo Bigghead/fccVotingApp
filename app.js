@@ -26,8 +26,9 @@ var url = process.env.url;
 console.log(url);
 mongoose.connect('mongodb://localhost/polls');
 
-//seed();
 
+
+//seed();
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended : true}));

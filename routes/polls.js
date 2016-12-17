@@ -13,8 +13,10 @@ router.post('/polls/:id', function(req, res){
   var dataArray = [];
 
   if(req.cookies[id.toString()] === undefined || req.cookies[id.toString()] === ''){
-  res.cookie(id, vote);
-  Polls.findById(id, function(err, foundPoll){
+    res.cookie(id, vote);
+
+
+  Polls.findById(req.params.id, function(err, foundPoll){
     if(err){
       console.log(err);
     } else {
@@ -27,8 +29,7 @@ router.post('/polls/:id', function(req, res){
          }
          dataArray.push([foundPoll.items[i].name, foundPoll.items[i].count]);
         }
-
-        res.render('hasVoted', {foundPoll:foundPoll, dataArray: dataArray, storedCookie: req.cookies[id.toString()]});
+        res.redirect('/polls/' + id );
       }
   });
  }

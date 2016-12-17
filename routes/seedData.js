@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
     express  = require('express'),
+    cookieParser = require('cookie-parser'),
     Polls    = require('../models/pollSchema.js');
 
 
@@ -44,6 +45,7 @@ var data = [
 
 
 function seed(){
+
   Polls.remove({}, function(err, success){
     if(err){
       console.log(err);
