@@ -50,7 +50,7 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-2">
-      <form action="/polls/<%= foundPoll._id %>" method="post">
+      <form class='poll-form'action="/polls/<%= foundPoll._id %>" method="post">
         <label for="">I'd Like to Vote For:</label>
         <select class="" name="vote">
           <option></option>
@@ -58,7 +58,7 @@
             <option value='<%= poll.name %>'><%= poll.name %></option>
             <% }); %>
           </select>
-          <button class='btn btn-primary'type="submit" name="button">Submit</button>
+          <button class='btn btn-block btn-primary'type="submit" name="button">Submit</button>
         </form>
         <% if (currentUser){ %>
           <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Or Add A New Option</button>

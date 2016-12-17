@@ -36,7 +36,7 @@ router.post('/polls/:id', function(req, res){
 
 router.post('/polls/:id/addedVote', function(req, res){
   var id = req.params.id;
-  var addedVote = req.body.addedUserPoll;
+  var addedVote = req.sanitize(req.body.addedUserPoll);
   Polls.findById(id, function(err, foundPoll){
     if(err){
       console.log(err);

@@ -6,6 +6,7 @@ var express      = require('express'),
     LocalStrategy = require('passport-local'),
     passportLocalMongoose = require('passport-local-mongoose'),
     Session      = require('express-session'),
+    expressSanitizer = require('express-sanitizer'),
     app          = express();
 
     //models imports
@@ -31,6 +32,7 @@ mongoose.connect('mongodb://localhost/polls');
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(cookieParser());
+app.use(expressSanitizer());
 app.use(express.static(__dirname + '/public'));
 
 

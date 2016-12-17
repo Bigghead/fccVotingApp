@@ -30,6 +30,15 @@ a:hover{
   border-radius: 10px;
 }
 
+.poll-form{
+  margin-top: 50%;
+}
+
+select{
+  width: 100%;
+  margin-bottom: 2px;
+}
+
 svg{
   background-color: #F0F8FF ! important;
 
