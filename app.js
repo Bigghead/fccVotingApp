@@ -26,7 +26,6 @@ var indexRoute = require('./routes/index.js'),
 //mongoose/mongo connection
 mongoose.Promise = global.Promise;
 var url = process.env.url;
-console.log(process.env);
 mongoose.connect(url);
 
 
@@ -65,6 +64,6 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.listen(process.env.PORT || 8000, function(){
+app.listen(process.env.PORT || 7000, function(){
   console.log('Voting Site Live!');
 });
