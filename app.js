@@ -67,5 +67,5 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.listen(port, function(){
-  console.log('Voting Site Live! at' + port);
+  console.log('Voting Site Live!');
 });
