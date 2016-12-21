@@ -35,7 +35,7 @@ router.post('/polls/:id', function(req, res){
  }
 });
 
-router.post('/polls/:id/addedVote', function(req, res){
+router.post('/polls/:id/addedVote', isLoggedIn, function(req, res){
   var id = req.params.id;
   var addedVote = req.sanitize(req.body.addedUserPoll);
   Polls.findById(id, function(err, foundPoll){
@@ -72,5 +72,13 @@ router.get('/polls/:id', function(req, res){
     }
   });
 });
+
+function isLoggedIn(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  } else {
+    res.render('login');
+  }
+}
 
 module.exports = router;
