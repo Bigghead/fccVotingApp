@@ -1,3 +1,6 @@
+require('dotenv').config();
+
+
 var express      = require('express'),
     mongoose     = require('mongoose'),
     bodyParser   = require('body-parser'),
@@ -23,8 +26,8 @@ var indexRoute = require('./routes/index.js'),
 //mongoose/mongo connection
 mongoose.Promise = global.Promise;
 var url = process.env.url;
-console.log(url);
-mongoose.connect('mongodb://localhost/polls');
+console.log(process.env);
+mongoose.connect(url);
 
 
 
