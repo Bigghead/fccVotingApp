@@ -99,11 +99,3 @@ select{
 #footer p{
   margin: 5px 0;
 }
-
-@media screen
-  and (max-width: 480px) {
-  #showChart{
-    width: 500;
-    height: 500;
-  }
-}
