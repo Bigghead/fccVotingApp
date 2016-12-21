@@ -51,8 +51,8 @@ a:hover{
 }
 
 #showChart{
-  width: 800 !important;
-  height: 800 !important;
+  width: 800 ;
+  height: 800 ;
 }
 
 #myChart{
@@ -102,5 +102,8 @@ select{
 
 @media screen
   and (max-width: 480px) {
-
+  #showChart{
+    width: 500;
+    height: 500;
+  }
 }
