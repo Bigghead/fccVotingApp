@@ -30,7 +30,6 @@ console.log(process.env);
 mongoose.connect(url);
 
 
-var port = process.env.PORT || 8000;
 // seed();
 
 app.set('view engine', 'ejs');
@@ -66,6 +65,6 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.listen(port, function(){
+app.listen(process.env.PORT || 8000, function(){
   console.log('Voting Site Live!');
 });
