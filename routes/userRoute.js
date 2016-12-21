@@ -11,7 +11,7 @@ router.get('/:id/userPolls', isLoggedIn,function(req, res){
   });
 });
 
-router.post('/:userID/userPolls/:pollID', function(req, res){
+router.post('/:userID/userPolls/:pollID', isLoggedIn, function(req, res){
   var userID = req.params.userID;
   //this id is the poll id, and not the user's
   var pollID = req.params.pollID;

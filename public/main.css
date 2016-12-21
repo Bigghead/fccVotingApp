@@ -1,5 +1,21 @@
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
 body{
   background-color: #5F9EA0;
+  position: relative;
+  margin: 0;
+ padding-bottom: 6rem;
+ min-height: 100%;
+ font-family:  ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
 
 }
 
@@ -34,19 +50,23 @@ a:hover{
   margin-top: 5%;
 }
 
-.poll-form{
-  margin-top: 50%;
+#showChart{
+  width: 800;
+  height: 800;
 }
+
+#myChart{
+  width: 1000 !important;
+  height: 1000 !important;
+}
+
 
 select{
   width: 100%;
   margin-bottom: 2px;
 }
 
-svg{
-  background-color: #F0F8FF ! important;
 
-}
 
 .userPolls{
   margin: auto;
@@ -65,13 +85,15 @@ svg{
   background-color: #F0F8FF !important;
 }
 
-#footer{
-  position: fixed;
-  left: 0px;
-  bottom: 0px;
-  height: 35px;
-  width: 100%;
-  background-color: #00CED1 ;
+
+#footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #00CED1;
+  text-align: center;
 }
 
 #footer p{

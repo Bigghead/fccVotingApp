@@ -5,17 +5,18 @@
 <% var id = foundPoll._id.toString(); %>
 
 <div class="text-center">
-  <h1><%= foundPoll.pollName %></h1>
+  <h1><strong><%= foundPoll.pollName %></strong></h1>
   <p>
     Some random description about <%= foundPoll.pollName %>
   </p>
   </div>
+  <hr>
 
 
 
 <div class="container main-poll">
   <div class="row">
-    <div class="col-lg-2">
+    <div class="col-lg-2 col-md-2 ">
       <form class='poll-form'action="/polls/<%= foundPoll._id %>" method="post">
         <label for="">I'd Like to Vote For:</label>
         <select class="" name="vote">
@@ -56,8 +57,8 @@
         <%  }  %>
     </div>
 
-    <div class="col-lg-10">
-       <canvas id="myChart" width="300" height="300"></canvas>
+    <div class="col-lg-10 col-md-10  show-canvas" >
+       <canvas id="showChart"></canvas>
    </div>
   </div>
 </div>
@@ -80,7 +81,7 @@
 
   }
 
-    var ctx = document.getElementById("myChart");
+    var ctx = document.getElementById("showChart");
 
     var myChart = new Chart(ctx, {
     type: 'pie',
@@ -97,4 +98,4 @@
   });
 
   </script>
-  <% include partials/footer %>
+<% include partials/footer %>
