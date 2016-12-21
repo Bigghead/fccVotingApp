@@ -20,5 +20,16 @@ router.get('/polls', cookieParser(), function(req, res){
   });
 });
 
+//CHART.JS
+router.get('/polls/chartJS', function(req, res){
+  Polls.findById('5855bb4bee527a2374f54be5', function(err, foundPoll){
+    if(err){
+      console.log(err);
+    } else {
+      res.render('chartShow', {foundPoll : foundPoll});
+    }
+  });
+});
+
 
 module.exports = router;

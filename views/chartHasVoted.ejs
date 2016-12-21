@@ -14,28 +14,24 @@
 
 
 
-
 <div class="container text-center">
-      <canvas id="myChart" width="300" height="300"></canvas>
-</div>
+      <div id='chart_div' class='voted-graph' align='center'>
 
+      </div>
+</div>
 
 <script type='text/javascript'>
 var foundPoll = <%- JSON.stringify(test)%>;
 var dataArray = <%- JSON.stringify(dataArray) %>;
 
-
-function randomNumber(){
-  return Math.floor(Math.random() * 256);
-}
+console.log(dataArray);
 var labels = [];
 var howMany = [];
-var backColor = [];
-for(var i = 0 ; i < 10; i ++){
+for(var i = 0 ; i < dataArray.length; i ++){
 labels.push(dataArray[i][0]);
 howMany.push(dataArray[i][1]);
-backColor.push('rgba('+randomNumber()+', '+ randomNumber()+ ', ' + randomNumber()+', 0.8)');
 }
+console.log(labels);
 
   var ctx = document.getElementById("myChart");
 
@@ -46,13 +42,30 @@ backColor.push('rgba('+randomNumber()+', '+ randomNumber()+ ', ' + randomNumber(
       datasets: [{
           label: '# of Votes',
           data: howMany,
-          backgroundColor: backColor,
-          borderColor: backColor,
+          backgroundColor: [
+              'rgba(255, 99, 132, 0.8)',
+              'rgba(54, 162, 235, 0.8)',
+              'rgba(255, 206, 86, 0.8)',
+              'rgba(75, 192, 192, 0.8)',
+              'rgba(153, 102, 255, 0.8)',
+              'rgba(255, 159, 64, 0.8)'
+          ],
+          borderColor: [
+              'rgba(255,99,132,1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)'
+          ],
           borderWidth: 1
       }]
   }
 });
 
 </script>
+
+
+
 
   <% include partials/footer %>

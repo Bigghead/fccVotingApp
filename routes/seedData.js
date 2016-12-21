@@ -23,6 +23,9 @@ var data = [
       {name: 'Afternoon', count: 1},
       {name: 'Dinner', count: 1},
       {name: 'Sleep', count: 1},
+      {name: 'Food', count: 1},
+      {name: 'Phone', count: 1},
+      {name: 'Dog Walk', count: 1}
     ]
   },
   {

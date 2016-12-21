@@ -30,6 +30,10 @@ a:hover{
   border-radius: 10px;
 }
 
+.main-poll{
+  margin-top: 5%;
+}
+
 .poll-form{
   margin-top: 50%;
 }
