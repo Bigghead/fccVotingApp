@@ -56,8 +56,8 @@ a:hover{
 }
 
 #myChart{
-  width: 800 !important;
-  height: 800 !important;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 
