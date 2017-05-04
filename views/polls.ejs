@@ -10,7 +10,7 @@
     <% polls.forEach(function(poll){ %>
       <div id='singlePoll' class="text-center">
       <a href='/polls/<%= poll._id %>'>
-      <h3><%= poll.pollName %></h3>
+      <h3 class='poll-name'><%= poll.pollName %></h3>
       </a>
       </div>
   <%  });  %>

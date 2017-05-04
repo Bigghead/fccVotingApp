@@ -10,7 +10,7 @@ html {
 }
 
 body{
-  background-color: #5F9EA0;
+  background-color: #AFEEEE;
   position: relative;
   margin: 0;
  padding-bottom: 6rem;
@@ -44,6 +44,10 @@ a:hover{
   color: white;
   border: 1px solid lightgray;
   border-radius: 10px;
+}
+
+.poll-name{
+  color: white;
 }
 
 .main-poll{
