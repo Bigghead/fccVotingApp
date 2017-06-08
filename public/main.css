@@ -25,6 +25,11 @@ a:hover{
 .navbar-default{
   margin-bottom: 0;
 }
+
+.nav>li>a{
+  font-size: 16px;
+}
+
 .poll-landing{
   height: 100%;
   background: url('https://hd.unsplash.com/photo-1467173572719-f14b9fb86e5f');
